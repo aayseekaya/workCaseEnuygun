@@ -1,3 +1,4 @@
+![alt text](https://github.com/aayseekaya/workCaseEnuygun/blob/main/public/todo.PNG?raw=true)
 #Local DB de laravel adında database oluşturulmalı
  
 #Kurulum
@@ -19,3 +20,4 @@ php artisan task:update
 php artisan key:generate
 
 php artisan serve
+ 
