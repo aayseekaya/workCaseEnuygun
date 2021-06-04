@@ -15,7 +15,9 @@
 <copy-button>php artisan task:update</copy-button>
 
 #Oluşturulan dataların viewda gösterilmesi
-
+```
+php artisan key:generate
+```
 <copy-button>php artisan key:generate</copy-button>
 
  <copy-button>php artisan serve</copy-button>
