@@ -18,7 +18,7 @@ class ToDoController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
-    {    $providers=Providers::get();
+    {   
         $toDoList = [];
         
         $issueList = ToDo::orderBy('level', 'DESC') ->get()->toArray();
