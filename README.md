@@ -2,22 +2,20 @@
 #Local DB de laravel adında database oluşturulmalı
  
 #Kurulum
- 
-composer install
+ <copy-button>composer install</copy-button>
 
 #Tabloların ve Dataların Oluşturulması
 
-php artisan migrate
+<copy-button>php artisan migrate</copy-button>
 
-php artisan db:seed 
+<copy-button>php artisan db:seed </copy-button>
 
 #Console Komutları Providerların içeri import edilmesi
 
-php artisan task:update
+<copy-button>php artisan task:update</copy-button>
 
 #Oluşturulan dataların viewda gösterilmesi
 
-php artisan key:generate
+<copy-button>php artisan key:generate</copy-button>
 
-php artisan serve
- 
+ <copy-button>php artisan serve</copy-button>
