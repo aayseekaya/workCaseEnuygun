@@ -40,15 +40,14 @@ class ToDo implements ToDoInterface
     public static function getWeeklyPlan(array $developerList = [])
     {
         $developerTasks = self::associateWithDevelopers($developerList);
-     
+
         foreach ($developerTasks as $key => $developer) {
-            dd($developer);
             $developerTasks[$key]['name']  = $developer['name'];
             $developerTasks[$key]['level'] = $developer['level'];
-            $developerTasks[$key]['time']  = $developer['time'];
+            $developerTasks[$key]['time']  = $developer['time'];;
             $developerTasks[$key]['weekly'] = self::groupByWeek($developer['tasks']);
-            
         }
+
         return $developerTasks;
     }
 
@@ -60,7 +59,7 @@ class ToDo implements ToDoInterface
     private static function associateWithDevelopers(array $developerList = [])
     {
         $tasks = ToDoModel::orderBy('time', 'desc')->get();
-dd($tasks);
+
         // Tasks group by level
         $taskGroup = [];
 
@@ -147,7 +146,6 @@ dd($tasks);
             ],
         ];
 
-        dd($weeklyTasks);
         foreach ($tasks as $task) {
 
             $taskTime = $task['time'];
