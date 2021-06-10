@@ -18,7 +18,7 @@ class ToDo implements ToDoInterface
      * @param  array  $toDoList
      */
     public static function add(array $toDoList = [])
-    {
+    { 
         foreach ($toDoList as $todo) {
             ToDoModel::updateOrCreate(
                 [

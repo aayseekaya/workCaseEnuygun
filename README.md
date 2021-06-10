@@ -18,7 +18,7 @@ php artisan db:seed
 #Console Komutları Providerların içeri import edilmesi
 
 ```
-php artisan task:update
+php artisan todo:update
 ```
 
 #Oluşturulan dataların viewda gösterilmesi

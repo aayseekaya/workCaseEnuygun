@@ -2,10 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Classes\ToDo;
 use Illuminate\Console\Command;
 use Ixudra\Curl\Facades\Curl;
-use Illuminate\Support\facades\http;
+use App\Interfaces\ProviderOneAdapter;
+use App\Interfaces\ProviderTwoAdapter;
+use App\Classes\IssueList;
+use App\Classes\ToDo;
 
 class updateToDoList extends Command
 {
@@ -22,6 +24,10 @@ class updateToDoList extends Command
      * @var string
      */
     protected $description = 'API\'lerden verileri çekerek to do listesini günceller';
+    const PROVIDER_LIST = [
+        ProviderOneAdapter::class,
+        ProviderTwoAdapter::class
+    ];
 
     /**
      * Create a new command instance.
@@ -39,44 +45,20 @@ class updateToDoList extends Command
      * @return mixed
      */
     public function handle()
-    {
-
-        // API 1
-      //  $provider1 = $this->getDataToApi('http://www.mocky.io/v2/5d47f24c330000623fa3ebfa');
-        $response1=http::get('http://www.mocky.io/v2/5d47f24c330000623fa3ebfa');
-        $provider1=$response1->json();
-        
-        foreach ($provider1 as $index => $taskData) {
-            $provider1[$index] = (object) [
-                'level' => $taskData["zorluk"],
-                'time'  => $taskData["sure"],
-                'id'    => $taskData["id"],
+    { 
+        $list = [];
+        foreach (self::PROVIDER_LIST as $provider) {
+        $list = array_merge($list, (new IssueList(new $provider))->getAll());
+        }
+        foreach ($list as $index => $taskData) {
+            $list[$index] = (object) [
+                'level' => $taskData["difficulty"],
+                'time'  => $taskData["timing"],
+                'id'    => $taskData["name"],
             ];
 
         }
-
-        ToDo::add($provider1);
-
-        // API 2
-       // $provider2 = $this->getDataToApi('http://www.mocky.io/v2/5d47f235330000623fa3ebf7');
-        $response2=http::get('http://www.mocky.io/v2/5d47f235330000623fa3ebf7');
-        $provider2=$response2->json();
-
-        foreach ($provider2 as $index => $taskData) {
-
-            foreach ($taskData as $id => $taskProperty) {
-
-                $provider2[$index] = (object) [
-                    'level' => $taskProperty["level"],
-                    'time'  => $taskProperty["estimated_duration"],
-                    'id'    => $id,
-                ];
-
-            }
-
-        }
-
-        ToDo::add($provider2);
+        ToDo::add($list);
 
     }
 
