@@ -25,7 +25,7 @@
 </head>
 <body class="bg-light">
 <div class="table-responsive">
-    <h1>Yazılımcı Haftalık Görev Planı</h1>
+    <h1>Yazılımcı Görev Planı</h1>
 
     <h5>Tüm görevlerin tamamlanma sürasi: {{$duration}} hafta</h5>
     <table class="table table-striped">
