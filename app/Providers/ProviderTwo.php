@@ -6,7 +6,7 @@ use Illuminate\Support\facades\http;
 
 class ProviderTwo
 {
-    public function get()
+    public function getAll()
     {
         try {
             $response2=http::get('http://www.mocky.io/v2/5d47f235330000623fa3ebf7');

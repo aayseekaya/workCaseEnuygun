@@ -11,7 +11,7 @@ class ProviderTwoAdapter implements ProviderAdaptorInterface
      */
     public function getIssueList()
     {
-        return $this->modify((new ProviderTwo())->get());
+        return $this->modify((new ProviderTwo())->getAll());
     }
 
     /**
