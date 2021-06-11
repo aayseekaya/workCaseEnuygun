@@ -10,7 +10,7 @@ use Illuminate\Support\facades\http;
 use Illuminate\Support\Facades\DB;
 class ToDoController extends Controller
 {
-    const WEEKLY_WORKING_HOURS = 45;
+
 
     /**
      * @param  Request  $request
@@ -24,32 +24,10 @@ class ToDoController extends Controller
         $issueList = ToDo::orderBy('level', 'DESC') ->get()->toArray();
         $developerList=DB::table('developer')->get();
         $issueSum=ToDo::sum('time');
-        $averageTimeDuration = round($issueSum / (self::WEEKLY_WORKING_HOURS * count($developerList)) );
-        for ($week=1; $week<=$averageTimeDuration; $week++) {
-            foreach ($developerList as $developer) {
+        $plan = new ToDo();
 
-                $hours = 0;
-                foreach ($issueList as $key => $issue) {
+        $result = $plan->getWeekPlan($issueList,$developerList,$issueSum);
 
-                    if (
-                        $hours + $issue["time"]<= self::WEEKLY_WORKING_HOURS
-                        && $issue["level"] <= $developer->capacity_per_hour
-                    ) {
-                        $toDoList[$week][$developer->name][] = $issue["id"];
-                        unset($issueList[$key]);
-                        $hours += $issue["time"];
-                    }
-                }
-            }
-            if (empty($issueList)) {
-                break;
-            }
-        }
-        $result= [
-            'duration' => $averageTimeDuration,
-            'tasks' => $toDoList,
-            'users' => $developerList,
-        ];
         return view('tasklist', $result);
     }
 }

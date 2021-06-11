@@ -18,4 +18,3 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', 'ToDoController@index')->name('index');
-//Route::get('/', 'ProvidersController@index')->name('index');

@@ -7,7 +7,6 @@ use Ixudra\Curl\Facades\Curl;
 use App\Interfaces\ProviderOneAdapter;
 use App\Interfaces\ProviderTwoAdapter;
 use App\Classes\IssueList;
-use App\Classes\ToDo;
 
 class updateToDoList extends Command
 {
@@ -58,16 +57,8 @@ class updateToDoList extends Command
             ];
 
         }
-        ToDo::add($list);
+        IssueList::add($list);
 
-    }
-
-    private function getDataToApi($url)
-    {
-        $response = Curl::to($url)->get();
-        $response = json_decode($response);
-
-        return $response;
     }
 
 
